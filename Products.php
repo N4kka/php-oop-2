@@ -4,6 +4,7 @@ class Products
     public $title;
     public $description;
     public $price;
+    public $available = true;
 
     function __construct($_title, $_description, $_price)
     {
@@ -16,4 +17,4 @@ class Products
     {
         return "$this->title $this->description € $this->price";
     }
-}   
+}

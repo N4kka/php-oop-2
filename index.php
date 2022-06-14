@@ -1,32 +1,30 @@
 <?php
+
 require_once __DIR__ . "/Food.php";
 require_once __DIR__ . "/Games.php";
 require_once __DIR__ . "/Kennels.php";
 require_once __DIR__ . "/User.php";
 
-$cibo = new Food("Croccantini", "Royal Canin", 100, "Manzo");
-var_dump($cibo);
+$food = new Food("Croccantini", "Royal Canin", 100 . '€', "Manzo");
 
-$giochi = new Games("Palla", "Gioco robusto per allenare i denti del cane", 20, "plastica");
-var_dump($giochi);
+$games = new Games("Palla", "Gioco robusto per allenare i denti del cane", 20 . '€', "plastica");
 
-$cucce = new Kennels("Cuccia", "Comodissima cuccia per far dormire il tuo cane in totale serenità e comodità", 150, "Pelle scamosciata");
+$kennels = new Kennels("Cuccia", "Comodissima cuccia per far dormire il tuo cane in totale serenità e comodità", 150 . '€', "Pelle scamosciata");
 
 $nicola = new User("Nicola", "sarlinicola7@gmail.com", "pincopallino");
-$nicola->addToCart($cibo);
-$nicola->addToCart($giochi);
-$nicola->addToCart($cucce);
+$nicola->addProductToCart($food);
+$nicola->addProductToCart($games);
+$nicola->addProductToCart($kennels);
 
 $giochi->available = false;
 
-$result = $nicola->addToCart($giochi);
+$result = $nicola->addProductToCart($games);
 if ($result) {
     echo "This game is added to the cart";
 } else {
     echo "This game is currently not available";
 }
 
-var_dump($nicola);
 
 ?>
 
@@ -44,16 +42,16 @@ var_dump($nicola);
 
     <h2>Prodotti per animali</h2>
     <ul>
-        <li> <?php echo $cibo->printInfo() ;?> </li>
-        <li> <?php echo $giochi->printInfo() ;?> </li>
-        <li> <?php echo $cucce->printInfo() ;?> </li>
+        <li> <?php echo 'PetFood: ' . $food->printInfo(); ?> </li>
+        <li> <?php echo 'PetGames: ' . $games->printInfo(); ?> </li>
+        <li> <?php echo 'PetKennels: ' . $kennels->printInfo(); ?> </li>
     </ul>
 
     <h2>Ciao <?php echo $nicola->name ?>, questo é il tuo carrello</h2>
     <ul>
-        <?php foreach($nicola->cart as $cartProducts) { ?>
-        <li> <?php echo $cartProducts->printInfo(); ?> </li>
-        <?php } ?>  
+        <?php foreach ($nicola->cart as $cartProducts) { ?>
+            <li> <?php echo $cartProducts->printInfo(); ?> </li>
+        <?php } ?>
     </ul>
     <h3>Totale: € <?php echo $nicola->getTotalPrice(); ?> </h3>
 

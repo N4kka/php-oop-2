@@ -1,34 +1,36 @@
 <?php
-class User {
+class User
+{
     public $name;
     public $email;
     private $password;
     public $cart = [];
 
-    protected $creditCard = true;
+    protected $creditCardExpired = true;
 
     function __construct($_name, $_email, $_password)
     {
-        $this-> name = $_name;
-        $this-> email = $_email;
-        $this-> password = $_password;
+        $this->name = $_name;
+        $this->email = $_email;
+        $this->password = $_password;
     }
 
-    function addToCart($_products) {
-        if($_products->available) {
+    function addProductToCart($_products)
+    {
+        if ($_products->available) {
             $this->cart[] = $_products;
-            return true;    
+            return true;
         } else {
             return false;
         }
     }
 
-    function getTotalPrice() {
-        $total = 0;
-        foreach($this->cart as $item) {
-            $total += $item->price;
+    function getTotalPrice()
+    {
+        $total_price = 0;
+        foreach ($this->cart as $item) {
+            $total_price += $item->price;
         }
-        return $total;
+        return $total_price;
     }
 }
-?>
